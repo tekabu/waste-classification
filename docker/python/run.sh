@@ -32,9 +32,9 @@ if [ "$(docker ps -aq -f name=${IMAGE_NAME})" ]; then
   docker rm ${IMAGE_NAME}
 fi
 
-# export DISPLAY=:0
+export DISPLAY=:0
 
-# xhost +local:docker
+xhost +local:docker
 
 # Run the Docker container
 docker run --name ${IMAGE_NAME} -it --rm \
@@ -44,6 +44,7 @@ docker run --name ${IMAGE_NAME} -it --rm \
   -w /app \
   --network ${APP_NETWORK} \
   --device=/dev/video0:/dev/video0 \
+  --device /dev/i2c-1 \
   -e DISPLAY=$DISPLAY \
   -v /tmp/.X11-unix:/tmp/.X11-unix \
   ${IMAGE_NAME} bash

@@ -20,10 +20,6 @@ def classify(frame):
     if prob >= 0.9:
         name = names_dict[np.argmax(probs)]
         print(name, prob)
-    else:
-        print(names_dict)
-
-proc = th.Thread(target=classify, args=(None,))
 
 def main():
     cap1 = cv2.VideoCapture(0)
@@ -33,17 +29,20 @@ def main():
 
     fps = cap1.get(cv2.CAP_PROP_FPS)
 
+    proc = th.Thread(target=classify, args=(None,))
+
     try:
         while True:
             _, frame = cap1.read()
 
             if _ and frame is not None:
-                if proc.is_alive == False and False:
+                frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
+                if proc.is_alive() == False:
                     proc = th.Thread(target=classify, args=(frame,))
                     proc.daemon = True
                     proc.start()
 
-            cv2.imshow(f'Camera {index+1}', frame)
+            cv2.imshow(f'Camera', frame)
 
             time.sleep(1 / fps)
 
