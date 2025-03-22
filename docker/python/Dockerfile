@@ -2,7 +2,7 @@ FROM python:3.9
 
 ARG APP_PATH
 
-RUN apt-get update && apt-get install -y \
+RUN sudo apt-get update && sudo apt-get install -y \
     python3-rpi.gpio \
     libgl1-mesa-glx \
     libglib2.0-0 \
@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y \
     libx264-dev \
     python3-pip \
     supervisor \
+    i2c-tools \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /tmp
