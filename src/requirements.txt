@@ -1,6 +1,0 @@
-ultralytics==8.2.15
-opencv-python
-numpy
-imutils
-RPi.GPIO
-smbus2
